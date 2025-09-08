@@ -1,3 +1,12 @@
 jupyter==1.1.1
 notebook==7.4.3
 ipykernel==6.29.5
+numpy
+requests
+torch
+stable-baselines3
+gymnasium
+openai
+pydantic
+httpx
+wikipedia-api

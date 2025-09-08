@@ -1,0 +1,28 @@
+Was ist die Summe der Geburtsjahre von Aryna Sabalenka und Anett Kontaveit?
+--------------------------------
+Was ist die Summe der Geburtsjahre von Aryna Sabalenka und Anett Kontaveit?
+--------------------------------
+Thought: tool_name='wikipedia' answer=None input='Aryna Sabalenka' reason='I need the birth year of Aryna Sabalenka'
+--------------------------------
+Observation from wikipedia: {
+  "query": "Aryna Sabalenka",
+  "title": "Aryna Sabalenka",
+  "summary": "Aryna Siarhiejeŭna Sabalenka (born 5 May 1998) is a Belarusian professional tennis player. She is currently the world No. 1 in women's singles by the WTA, and is a former world No. 1 in doubles. Sabalenka has won 21 WTA Tour-level singles titles, including four majors – two at the Australian Open and two at the US Open – as well as nine WTA 1000 events. She has also won six doubles titles, including the 2019 US Open and 2021 Australian Open, both partnering with Elise Mertens.\nSabalenka came to prominence in 2017 when, together with Aliaksandra Sasnovich, she led the Belarus Fed Cup team to a runner-up finish even though both were ranked outside the top 75 at the time. She finished 2018 and 2019 ranked No. 11 in the world in singles. Following two major singles semifinal appearances in 2021, Sabalenka rose to the world No. 2 ranking but struggled to maintain that success in 2022 consistently. In 2023, she won her first major singles title at the Australian Open and obtained the world No. 1 ranking, being named the ITF World Champion for the season. \nSabalenka successfully defended her Australian Open title and won the US Open the following year, clinching the year-end No. 1 ranking. In 2025, she defended her title at the US Open, and finished as the runner-up at the Australian and French Opens.\nSabalenka began playing doubles regularly in 2019. With Mertens as her partner, she found instant success by winning the Sunshine Double (Indian Wells and Miami) that same year. After the US Open doubles title later in the season, she qualified for the WTA Finals for the first time. With the 2021 Australian Open doubles title, Sabalenka became the world No. 1 in the discipline, after which she shifted to playing exclusively singles.\n\nSabalenka has an aggressive style of play, often accumulating high numbers of winners and unforced errors. With her height, she also displays powerful serves."
+}
+--------------------------------
+Thought: tool_name='wikipedia' answer=None input='Anett Kontaveit' reason='I need the birth year of Anett Kontaveit'
+--------------------------------
+Observation from wikipedia: {
+  "query": "Anett Kontaveit",
+  "title": "Anett Kontaveit",
+  "summary": "Anett Kontaveit (Estonian pronunciation: [aˈnetː ˈkon.taˈveit]; born 24 December 1995) is an Estonian former professional tennis player. She was ranked as high as world No. 2 by the Women's Tennis Association (WTA), which she first achieved on 6 June 2022 to become the highest-ranked Estonian tennis player in history. She also attained a career-high ranking of No. 95 in doubles on 2 March 2020. \nKontaveit won six singles titles on the WTA Tour as well as eleven singles and five doubles titles on the ITF Circuit. She produced her best performance at a major by reaching the quarterfinals at the 2020 Australian Open, and she also contested two WTA 1000 finals at the 2018 Wuhan Open and 2022 Qatar Open. In 2021, after winning four titles in the span of seven tournaments between August and October, Kontaveit became the first Estonian to qualify for and participate in the WTA Finals, where she reached the final.\nIn June 2023, Kontaveit announced her retirement following her diagnosis of lumbar disc degeneration and she made her final professional appearance at the 2023 Wimbledon Championships, where she played her final match on 7 July 2023. She played her farewell match at Tondiraba Ice Hall in Tallinn, Estonia against her close friend Ons Jabeur on 11 November 2023."
+}
+--------------------------------
+Thought: tool_name='sum' answer=None input='[1998, 1995]' reason='I need to calculate the sum of the birth years 1998 and 1995'
+--------------------------------
+Observation from sum: 3993.0
+--------------------------------
+Thought: tool_name=None answer='Die Summe der Geburtsjahre von Aryna Sabalenka (1998) und Anett Kontaveit (1995) ist 3993.' input=None reason="I can answer without using any more tools. I'll use the user's language to answer"
+--------------------------------
+Final Answer: Die Summe der Geburtsjahre von Aryna Sabalenka (1998) und Anett Kontaveit (1995) ist 3993.
+--------------------------------
