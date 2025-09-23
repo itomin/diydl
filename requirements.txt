@@ -3,10 +3,15 @@ notebook==7.4.3
 ipykernel==6.29.5
 numpy
 requests
-torch
+torch==2.3.0
 stable-baselines3
 gymnasium
 openai
 pydantic
 httpx
 wikipedia-api
+torchtext==0.18.0
+torchdata==0.9.0
+portalocker==2.8.2
+transformers
+nltk
