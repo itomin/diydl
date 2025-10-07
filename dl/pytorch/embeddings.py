@@ -56,7 +56,9 @@ print(f"Token IDs: {tokens[0]}")
 
 
 #%%
-#     
+
+
+
 # Skip-gram: Create (target_word, aggregated_context) pairs
 window_size = 2
 target_context_pairs = []
@@ -124,16 +126,40 @@ if target_context_pairs:
 
 #%%
 class Embedding(torch.nn.Module):
-    def __init__(self, vocab_size, output_size, embedding_size):
+    def __init__(self, vocab_size, embedding_size):
         super(Embedding, self).__init__()
         print(f"Vocab size: {vocab_size}, Embedding size: {embedding_size}")
-        self.embeddings = torch.nn.Linear(vocab_size, embedding_size, bias=False)
-        self.linear = torch.nn.Linear(embedding_size, vocab_size, bias=False)
+        self.l1 = torch.nn.Linear(vocab_size, embedding_size, bias=True)
+        self.relu = torch.nn.ReLU()
+        self.l2 = torch.nn.Linear(embedding_size, vocab_size, bias=True)
+        self.softmax = torch.nn.Softmax(dim=1)
 
     def forward(self, x):
-        embedded = self.embeddings(x)
-        out = self.linear(embedded)  # Feed to
-        return out
+        embedded = self.l1(x)
+        h = self.relu(embedded)  # Feed to
+        z = self.l2(h)  # Feed to
+        return z
+
+#%%
+class CBOW_Model(torch.nn.Module):
+    def __init__(self, vocab_size, embedding_size):
+        super(CBOW_Model, self).__init__()
+        self.embeddings = torch.nn.Embedding(
+            num_embeddings=vocab_size,
+            embedding_dim=embedding_size,
+            max_norm=1,
+        )
+        self.linear = torch.nn.Linear(
+            in_features=embedding_size,
+            out_features=vocab_size,
+        )
+    
+    def forward(self, inputs_):
+        x = self.embeddings(inputs_)
+        x = x.mean(axis=1)
+        x = self.linear(x)
+        return x
+
 
 # %%
 output_size = context_tensor.shape[0]
@@ -145,20 +171,21 @@ print(f"Context tensor shape: {context_tensor.shape}")
 print(f"Target tensor shape: {target_tensor.shape}")
 
 
-model = Embedding(vocab_size=vocab_size, output_size=output_size, embedding_size=2)
+model = CBOW_Model(vocab_size=vocab_size, embedding_size=2)
 
 
-n_iterations = 10000
+n_iterations = 1000
 optimizer = optim.SGD(model.parameters(), lr=0.9)
 loss = torch.nn.CrossEntropyLoss()
 
 for epoch in range(n_iterations):
     model.train()
+    optimizer.zero_grad()
     y_hat = model(context_tensor)
     L = loss(y_hat, target_tensor)
     L.backward()
     optimizer.step()
-    optimizer.zero_grad()
+   
     if epoch % 100 == 0:
         print(f"Epoch {epoch}, Loss: {L}")
 
@@ -166,7 +193,8 @@ for epoch in range(n_iterations):
 
 # print("Prediction")
 # with torch.no_grad():
-#     print(model(context_tensor))
+#%%
+target_tensor
 
 #%%
 corpus = F.one_hot(tokens).float()

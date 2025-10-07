@@ -77,8 +77,7 @@ class Agent:
         )
         
         choice = self._ask(prompt)
-        self.logger.info(f"THINK: Received choice: tool_name={choice.tool_name}, 
-        reason={choice.reason}, answer={choice.answer}")
+        self.logger.info(f"THINK: Received choice: tool_name={choice.tool_name},  reason={choice.reason}, answer={choice.answer}")
         
         self.trace("assistant", f"Thought: {choice}")
         self.decide(choice)

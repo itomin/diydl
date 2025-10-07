@@ -5,12 +5,17 @@ import json
 from typing import Callable
 import wikipediaapi
 from enum import Enum, auto
+from openai import OpenAI
+import os
+from typing import Optional, List
+from pydantic import BaseModel, Field
 
 class Name(Enum):
     """Enumeration for tool names available to the agent."""
     WIKIPEDIA = auto()
     SUM = auto()
     NONE = auto()
+    INVIVO = auto()
     def __str__(self) -> str:
         return self.name.lower()
 
@@ -101,3 +106,45 @@ class SumTool(Tool):
             except:
                 return 0
         return 0
+
+
+class Codes(BaseModel):
+    invivo: Optional[List[str]] = Field(None, description="The codes to search for.")
+
+
+class SummarizerTool(Tool):
+    def __init__(self):
+        super().__init__(
+            Name.SUMMARIZER, 
+            self.__call__,
+            """
+            Use this tool to perform qualitative research conducting first, hermeneutic-interpretive phase of qualitative data analysis.
+            Read the text to gain an initial, holistic understanding without theorizing. Produce a concise, factual Case Summary (2–3 sentences) 
+            reflecting the respondent’s expressed meaning, not your interpretation.
+            """,
+            {
+                "type": "object",
+                "properties": {"type": "string", "description": "The codes to search for."},
+            }
+        )
+
+        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.model = "gpt-5"
+        
+
+    def __call__(self, ctx):
+        prompt = self.summary_template.format(
+            research_question=ctx["research_question"],
+            question=ctx["question"],
+            answer=ctx["answer"],
+            intention=ctx["intention"],
+            hypothesis=ctx["hypothesis"]
+        )
+        
+        response = self.client.responses.parse(
+            model=self.model, 
+            input=prompt,
+            text_format=str)
+        
+
+        return "InVivo"
